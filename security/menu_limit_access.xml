@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <menuitem name="Human Resources"
+            id="hr.menu_hr_root"
+            sequence="90"/>
+
+    </data>
+</odoo>

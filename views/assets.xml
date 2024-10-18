@@ -1,0 +1,7 @@
+<odoo>
+    <template id="assets_common" name="customer_invoice_management assets" inherit_id="web.assets_qweb">
+        <xpath expr="." position="inside">
+            <link href="/customer_invoice_management/static/src/css/report_style.css" rel="stylesheet"/>
+        </xpath>
+    </template>
+</odoo>

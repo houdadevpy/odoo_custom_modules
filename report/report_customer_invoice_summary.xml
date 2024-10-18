@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report 
+        id="action_report_customer_invoice_summary" 
+        model="account.move"
+        string="Customer Invoice Summary Report" 
+        report_type="qweb-pdf" 
+        name="customer_invoice_management.customer_invoice_report_summary_template" 
+        file="customer_invoice_management.customer_invoice_report_summary_template" 
+        attachment_use="False"/>
+
+</odoo>

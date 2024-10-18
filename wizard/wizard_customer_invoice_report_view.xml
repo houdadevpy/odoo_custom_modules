@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_customer_invoice_report_wizard" model="ir.ui.view">
+        <field name="name">customer.invoice.report.wizard.form</field>
+        <field name="model">customer.invoice.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Customer Invoice Summary Report">
+                <group>
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="partner_id" />
+                </group>
+                <footer>
+                    <button string="Download PDF" type="object" name="generate_report" class="btn-primary" />
+                    <button string="Send Report" type="object" name="generate_and_send_invoice_report" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_invoice_report_wizard" model="ir.actions.act_window">
+        <field name="name">Customer Invoice Summary Report</field>
+        <field name="res_model">customer.invoice.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+ <menuitem id="menu_customer_invoice_report"
+              name="Customer Invoice Summary Report"
+              parent="account.menu_finance"
+              action="action_customer_invoice_report_wizard" 
+            groups="customer_invoice_management.group_custom_onvoice"/>
+</odoo>
