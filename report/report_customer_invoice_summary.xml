@@ -9,4 +9,19 @@
         file="customer_invoice_management.customer_invoice_report_summary_template" 
         attachment_use="False"/>
 
+
+
+    <record id="invoice_report_email_template" model="mail.template">
+        <field name="name">Custom Report Email</field>
+        <field name="model_id" ref="customer_invoice_management.model_customer_invoice_report_wizard"/>
+        <field name="subject">Your Custom Report</field>
+        <field name="email_from">{{object.company_id.email}}</field>
+        <field name="email_to">{{object.partner_id.email}}</field>
+        <field name="body_html">
+            <![CDATA[
+            <p>Hello,</p>
+            <p>Please find your custom report attached.</p>
+            ]]>
+        </field>
+    </record>
 </odoo>

@@ -14,6 +14,70 @@ class CustomerInvoiceReportWizard(models.TransientModel):
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
     partner_id = fields.Many2one('res.partner', string='Customer', required=True)
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    email_body = fields.Text(string="Email Body")
+
+
+    def generate_and_send_invoice_report(self):
+        invoice_report = self.env.ref('customer_invoice_management.action_report_customer_invoice_summary')
+        invoices = self.env['account.move'].search([
+            ('move_type', '=', 'out_invoice'),
+            ('partner_id', '=', self.partner_id.id),
+            ('invoice_date', '>=', self.start_date),
+            ('invoice_date', '<=', self.end_date),
+        ])
+        
+        # Raise an error if no invoices found
+        if not invoices:
+            raise ValidationError("No invoices found for the selected criteria.")
+        
+        # Prepare the data to be passed
+        data = {
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'partner_id': self.partner_id.id,
+            'invoices': invoices.ids,
+        }
+        data_record = base64.b64encode(
+            self.env['ir.actions.report'].sudo()._render_qweb_pdf(
+                invoice_report, [self.id], data=data)[0])
+
+
+        ir_values = {
+            'name': 'Invoice ',
+            'type': 'binary',
+            'datas': data_record,
+            'store_fname': data_record,
+            'mimetype': 'application/pdf',
+            'res_model': 'account.move',
+        }
+        invoice_report_attachment_id = self.env[
+            'ir.attachment'].sudo().create(
+            ir_values)
+        if invoice_report_attachment_id:
+            email_template = self.env.ref(
+                'customer_invoice_management.invoice_report_email_template')
+            if self.partner_id.email:
+                email = self.partner_id.email
+            else:
+                email = 'houdalemkiri@gmail.com'
+            if email_template and email:
+                email_values = {
+                    # 'email_from': self.env.user.company_id.email,
+                    'email_to': email,
+                    'email_cc': False,
+                    'scheduled_date': False,
+                    'recipient_ids': [],
+                    'partner_ids': [],
+                    'auto_delete': True,
+                }
+                email_template.attachment_ids = [
+                    (4, invoice_report_attachment_id.id)]
+                email_template.with_context(partner=self.partner_id,
+                                            inv=self).send_mail(
+                    self.id, email_values=email_values, force_send=True)
+                email_template.attachment_ids = [(5, 0, 0)]
+        # return res
 
 
     def generate_report(self):
@@ -102,3 +166,15 @@ class CustomerInvoiceReport(models.AbstractModel):
             'end_date': end_date,
             'tax_dict': tax_dict,
         }
+
+class CustomerInvoiceReportPreview(models.TransientModel):
+    _name = 'customer.invoice.report.preview'
+    _description = 'Customer Invoice Report Preview'
+    _inherits = {'mail.compose.message':'composer_id'}
+
+    report_wizard_id = fields.Many2one('customer.invoice.report.wizard')
+    composer_id = fields.Many2one('mail.compose.message', string='Composer', required=True, ondelete='cascade')
+
+
+    def send_and_print_action(self):
+        print("ll")
