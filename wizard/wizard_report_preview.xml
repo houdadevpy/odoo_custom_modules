@@ -13,30 +13,34 @@
                     <div name="mail_form">
                         <!-- visible wizard -->
                         <div>
-                            <group>                                
+                            <group>        
+                                <field name="email_to" placeholder="Subject..." required="1"/>                        
                                 <field name="subject" placeholder="Subject..." required="1"/>
                             </group>
-                            <field name="body" class="oe-bordered-editor" options="{'style-inline': true}"/>
+                            <group>                                
+                                <field name="body" class="oe-bordered-editor" options="{'style-inline': true}" widget="html" required="1"/>
+                            </group>
                         </div>
                         <group>
                             <group>
-                                <field name="attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1" colspan="2"/>
+                                <field name="attachment_ids" widget="many2many_binary" string="Attach a file" nolabel="1" colspan="2" required="1"/>
                             </group>
                         </group>
                     </div>
 
                     <footer>
-                        <button string="Send &amp; Print"
-                            attrs="{'invisible': ['|', ('is_email', '=', False), ('is_print', '=', False)]}" data-hotkey="q"
-                            name="send_and_print_action" type="object" class="send_and_print btn-primary o_mail_send"/>
-                        
-                        <button string="Print" data-hotkey="q"
-                            attrs="{'invisible': ['|', ('is_print', '=', False), ('is_email', '=', True)]}"
-                            name="send_and_print_action" type="object" class="print btn-primary o_mail_send"/>
+                        <button string="Send"
+                             data-hotkey="q"
+                            name="send_and_print_action" type="object" class="send_and_print btn-primary o_mail_send"/>                        
                         <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
                     </footer>
                 </form>
             </field>
+        </record>
+        <record model="ir.actions.act_window" id="account_invoice_send_wizard">
+            <field name="name">account_invoice_send_wizard window</field>
+            <field name="res_model">customer.invoice.report.preview</field>
+            <field name="view_mode">form</field>
         </record>
     </data>
 </odoo>

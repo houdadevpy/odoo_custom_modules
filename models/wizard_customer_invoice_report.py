@@ -39,7 +39,7 @@ class CustomerInvoiceReportWizard(models.TransientModel):
             'invoices': invoices.ids,
         }
         data_record = base64.b64encode(
-            self.env['ir.actions.report'].sudo()._render_qweb_pdf(
+            self.env['ir.actions.report'].sudo()._render_qweb_html(
                 invoice_report, [self.id], data=data)[0])
 
 
@@ -54,30 +54,36 @@ class CustomerInvoiceReportWizard(models.TransientModel):
         invoice_report_attachment_id = self.env[
             'ir.attachment'].sudo().create(
             ir_values)
-        if invoice_report_attachment_id:
-            email_template = self.env.ref(
-                'customer_invoice_management.invoice_report_email_template')
-            if self.partner_id.email:
-                email = self.partner_id.email
-            else:
-                email = 'houdalemkiri@gmail.com'
-            if email_template and email:
-                email_values = {
-                    # 'email_from': self.env.user.company_id.email,
-                    'email_to': email,
-                    'email_cc': False,
-                    'scheduled_date': False,
-                    'recipient_ids': [],
-                    'partner_ids': [],
-                    'auto_delete': True,
-                }
-                email_template.attachment_ids = [
-                    (4, invoice_report_attachment_id.id)]
-                email_template.with_context(partner=self.partner_id,
-                                            inv=self).send_mail(
-                    self.id, email_values=email_values, force_send=True)
-                email_template.attachment_ids = [(5, 0, 0)]
-        # return res
+
+        _logger.warning('#########################################')
+        template = self.env.ref('customer_invoice_management.invoice_report_email_template')
+        email_values = template.generate_email(self.ids,['subject', 'body_html',
+             'email_from',
+             'email_cc', 'email_to', 'partner_to', 'reply_to',
+             'auto_delete', 'scheduled_date'])
+
+        
+
+        _logger.warning('WARNING: DATA RECORD 0--  %s', template)
+        _logger.warning('WARNING: DATA RECORD 1--  %s', email_values[self.id].get('body_html', ''))
+        _logger.warning('#########################################')
+
+        report_action = {
+            'name': ('Send Invoice'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'customer.invoice.report.preview',
+            'views': [[False, 'form']],
+            'target': 'new',
+            'context': {'default_attachment_ids' : [(6, 0, invoice_report_attachment_id.ids)],
+                        'default_subject' : email_values[self.id]['subject'],
+                        'default_body' : email_values[self.id]['body_html'],
+                        'default_email_to' : email_values[self.id]['email_to'],
+                        },
+        }
+        return report_action
+        
 
 
     def generate_report(self):
@@ -173,8 +179,23 @@ class CustomerInvoiceReportPreview(models.TransientModel):
     _inherits = {'mail.compose.message':'composer_id'}
 
     report_wizard_id = fields.Many2one('customer.invoice.report.wizard')
-    composer_id = fields.Many2one('mail.compose.message', string='Composer', required=True, ondelete='cascade')
-
+    email_to = fields.Char(string="Recipient")
 
     def send_and_print_action(self):
-        print("ll")
+        email_template = self.env.ref(
+            'customer_invoice_management.invoice_report_email_template')
+        
+        if email_template:
+            email_values = {
+                'email_to': self.email_to,
+                'email_cc': False,
+                'scheduled_date': False,
+                'recipient_ids': [],
+                'partner_ids': [],
+                'auto_delete': True,
+                'body_html': self.body,
+            }
+            if(self.attachment_ids):
+                email_template.attachment_ids = [(6, 0, self.attachment_ids.ids)]
+            email_template.send_mail(
+                self.id, email_values=email_values, force_send=True)

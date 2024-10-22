@@ -14,13 +14,20 @@
     <record id="invoice_report_email_template" model="mail.template">
         <field name="name">Custom Report Email</field>
         <field name="model_id" ref="customer_invoice_management.model_customer_invoice_report_wizard"/>
-        <field name="subject">Your Custom Report</field>
+        <field name="subject">{{ object.company_id.name }} -- Facture (Du : {{ object.start_date}} - Au : {{ object.end_date}})</field>
         <field name="email_from">{{object.company_id.email}}</field>
         <field name="email_to">{{object.partner_id.email}}</field>
         <field name="body_html">
             <![CDATA[
-            <p>Hello,</p>
-            <p>Please find your custom report attached.</p>
+                <p>Hello ,</p>
+
+                <p>I hope this message finds you well.</p>
+
+                <p>Attached, you will find your custom report for your review. Should you have any questions or require further assistance, please do not hesitate to reach out.</p>
+
+                <p>Thank you for your attention, and I look forward to your feedback.</p>
+
+                <p>Best regards,<br />
             ]]>
         </field>
     </record>

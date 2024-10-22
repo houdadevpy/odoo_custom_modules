@@ -29,6 +29,7 @@
         'security/invoice_security.xml',
         # 'views/assets.xml',
         'wizard/wizard_customer_invoice_report_view.xml',
+        'wizard/wizard_report_preview.xml',
         'report/report_customer_invoice.xml',
         'report/customer_invoice_report_template.xml',
         'report/report_customer_invoice_summary.xml',

@@ -12,7 +12,7 @@
                 </group>
                 <footer>
                     <button string="Download PDF" type="object" name="generate_report" class="btn-primary" />
-                    <button string="Send Report" type="object" name="generate_and_send_invoice_report" class="btn-primary" />
+                    <button string="Preview &amp; Send" type="object" name="generate_and_send_invoice_report" class="btn-primary" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
@@ -25,27 +25,6 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
-
-    <record id="view_email_preview" model="ir.ui.view">
-        <field name="name">customer.invoice.report.email.preview</field>
-        <field name="model">customer.invoice.report.wizard</field>
-        <field name="arch" type="xml">
-            <form string="Email Preview">
-                <field name="email_preview" widget="html" readonly="1"/>
-                <footer>
-                    <button string="Send Email" type="object" name="send_email" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
-                </footer>
-            </form>
-        </field>
-    </record>
-
-
-
-
-
-
 
  <menuitem id="menu_customer_invoice_report"
               name="Customer Invoice Summary Report"
