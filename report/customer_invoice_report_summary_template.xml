@@ -2,76 +2,78 @@
 <odoo>
     <template id="customer_invoice_report_summary_template">
         <t t-call="web.html_container">
-            <div class="page" style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5;">
-                <h1 style="text-align: center; font-size: 24px; margin-bottom: 10px;">Journal des ventes</h1>
-                <p style="text-align: center; margin-bottom: 40px;">
-                    Du : 01 septembre 2024 au : 30 septembre 2024
-                </p>
+            <t t-call="web.external_layout">
+                <div class="page" style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5;">
+                    <h1 style="text-align: center; font-size: 24px; margin-bottom: 10px;">Journal des ventes</h1>
+                    <p style="text-align: center; margin-bottom: 40px;">
+                        Du : <span t-esc="start_date"/> au : <span t-esc="end_date"/>
+                    </p>
 
-                <!-- Table with sales data -->
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-                    <thead>
-                        <tr style="background-color: #f2f2f2;">
-                            <th style="border: 1px solid black; padding: 10px; text-align: left;">Numéro</th>
-                            <th style="border: 1px solid black; padding: 10px; text-align: left;">Date</th>
-                            <th style="border: 1px solid black; padding: 10px; text-align: left;">Nom</th>
-                            <th style="border: 1px solid black; padding: 10px; text-align: right;">Total HT</th>
-                            <th style="border: 1px solid black; padding: 10px; text-align: right;">Total TVA</th>
-                            <th style="border: 1px solid black; padding: 10px; text-align: right;">Total TTC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="docs" t-as="inv">
-                            <tr>
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.name"/></td>
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.invoice_date"/></td>
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.partner_id.name"/></td>
-                                <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_untaxed"/></td>
-                                <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_tax"/></td>
-                                <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_total"/></td>
+                    <!-- Table with sales data -->
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid black; padding: 10px; text-align: left;">Numéro</th>
+                                <th style="border: 1px solid black; padding: 10px; text-align: left;">Date</th>
+                                <th style="border: 1px solid black; padding: 10px; text-align: left;">Nom</th>
+                                <th style="border: 1px solid black; padding: 10px; text-align: right;">Total HT</th>
+                                <th style="border: 1px solid black; padding: 10px; text-align: right;">Total TVA</th>
+                                <th style="border: 1px solid black; padding: 10px; text-align: right;">Total TTC</th>
                             </tr>
-                        </t>
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td align="right" style="font-weight: bold;">Total</td>
-                            <t t-set="total_amount_untaxed" t-value="sum(l.amount_untaxed for l in docs)"/>
-                            <td align="right" style="font-weight: bold;"><t t-esc="total_amount_untaxed"/><t t-esc="inv.currency_id.name"/></td>
-                            <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_tax for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
-                            <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_total for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- VAT Recap -->
-                <p style="font-weight: bold; margin-top: 40px;font-style: italic;font-weight: bold;">Récapitulatif de TVA</p>
-                <t t-set="taxes" t-value="docs.mapped('invoice_line_ids').mapped('tax_ids')"/>
-
-                <table style="width: 60%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background-color: #f2f2f2;">
-                            <th style="border: 1px solid black; padding: 8px;">Taux TVA</th>
-                            <th style="border: 1px solid black; padding: 8px;">Total HT</th>
-                            <th style="border: 1px solid black; padding: 8px;">Total TVA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="tax_dict.items()" t-as="tax">
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="inv">
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.name"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.invoice_date"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="inv.partner_id.name"/></td>
+                                    <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_untaxed"/></td>
+                                    <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_tax"/></td>
+                                    <td style="border: 1px solid black; padding: 8px; text-align: right;"><t t-esc="inv.amount_total"/></td>
+                                </tr>
+                            </t>
                             <tr>
-                                <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax"/></td> -->
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][0]"/></td>
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][1]"/></td>
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][2]"/></td>
-
-                                <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="sum(line.price_subtotal for line in docs.mapped('invoice_line_ids') if tax in line.tax_ids)"/></td>
-                                
-
-                                <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1]"/></td> -->
+                                <td/>
+                                <td/>
+                                <td align="right" style="font-weight: bold;">Total</td>
+                                <t t-set="total_amount_untaxed" t-value="sum(l.amount_untaxed for l in docs)"/>
+                                <td align="right" style="font-weight: bold;"><t t-esc="total_amount_untaxed"/><t t-esc="inv.currency_id.name"/></td>
+                                <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_tax for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
+                                <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_total for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
                             </tr>
-                        </t>
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+
+                    <!-- VAT Recap -->
+                    <p style="font-weight: bold; margin-top: 40px;font-style: italic;font-weight: bold;">Récapitulatif de TVA</p>
+                    <t t-set="taxes" t-value="docs.mapped('invoice_line_ids').mapped('tax_ids')"/>
+
+                    <table style="width: 60%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="border: 1px solid black; padding: 8px;">Taux TVA</th>
+                                <th style="border: 1px solid black; padding: 8px;">Total HT</th>
+                                <th style="border: 1px solid black; padding: 8px;">Total TVA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="tax_dict.items()" t-as="tax">
+                                <tr>
+                                    <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax"/></td> -->
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][0]"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][1]"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][2]"/></td>
+
+                                    <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="sum(line.price_subtotal for line in docs.mapped('invoice_line_ids') if tax in line.tax_ids)"/></td>
+                                    
+
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1]"/></td> -->
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
         </t>
     </template>
 </odoo>

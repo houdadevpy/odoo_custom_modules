@@ -27,6 +27,7 @@
     'data': [
         'security/ir.model.access.csv',
         'security/invoice_security.xml',
+        'security/menu_limit_access.xml',
         # 'views/assets.xml',
         'wizard/wizard_customer_invoice_report_view.xml',
         'wizard/wizard_report_preview.xml',

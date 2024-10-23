@@ -2,6 +2,7 @@ from odoo import models, fields, api
 import base64
 
 import logging
+import datetime
 
 from odoo.exceptions import UserError, ValidationError
 _logger = logging.getLogger(__name__)
@@ -168,8 +169,8 @@ class CustomerInvoiceReport(models.AbstractModel):
         return {
             'docs': invoices,  # This is the invoice records
             'partner': partner,  # Pass the partner to use in the report
-            'start_date': start_date,
-            'end_date': end_date,
+            'start_date': (datetime.datetime.strptime(start_date, '%Y-%m-%d')).strftime('%d %b %Y'),
+            'end_date': (datetime.datetime.strptime(end_date, '%Y-%m-%d')).strftime('%d %b %Y'),
             'tax_dict': tax_dict,
         }
 

@@ -30,5 +30,5 @@
               name="Customer Invoice Summary Report"
               parent="account.menu_finance"
               action="action_customer_invoice_report_wizard" 
-            groups="customer_invoice_management.group_custom_onvoice"/>
+            groups="customer_invoice_management.group_custom_invoice"/>
 </odoo>
