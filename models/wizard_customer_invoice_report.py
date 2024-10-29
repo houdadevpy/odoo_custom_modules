@@ -39,19 +39,15 @@ class CustomerInvoiceReportWizard(models.TransientModel):
             'partner_id': self.partner_id.id,
             'invoices': invoices.ids,
         }
-        data_record = base64.b64encode(
-            self.env['ir.actions.report'].sudo()._render_qweb_html(
-                invoice_report, [self.id], data=data)[0])
-
-
+        generated_report = self.env['ir.actions.report']._render_qweb_pdf(invoice_report, [self.id], data=data)
+        data_record = base64.b64encode(generated_report[0])
         ir_values = {
-            'name': 'Invoice ',
+            'name': 'Invoice Report',
             'type': 'binary',
             'datas': data_record,
-            'store_fname': data_record,
             'mimetype': 'application/pdf',
-            'res_model': 'account.move',
-        }
+            'res_model': 'customer.invoice.report.wizard',
+            }
         invoice_report_attachment_id = self.env[
             'ir.attachment'].sudo().create(
             ir_values)
@@ -169,8 +165,8 @@ class CustomerInvoiceReport(models.AbstractModel):
         return {
             'docs': invoices,  # This is the invoice records
             'partner': partner,  # Pass the partner to use in the report
-            'start_date': (datetime.datetime.strptime(start_date, '%Y-%m-%d')).strftime('%d %b %Y'),
-            'end_date': (datetime.datetime.strptime(end_date, '%Y-%m-%d')).strftime('%d %b %Y'),
+            'start_date': start_date.strftime('%d %b %Y'),
+            'end_date': end_date.strftime('%d %b %Y'),
             'tax_dict': tax_dict,
         }
 

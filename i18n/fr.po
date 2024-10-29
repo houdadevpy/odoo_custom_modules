@@ -1,0 +1,121 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* customer_invoice_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-23 19:27+0000\n"
+"PO-Revision-Date: 2024-10-23 19:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: customer_invoice_management
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
+msgid "Attach a file"
+msgstr "Joindre un fichier"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__attachment_ids
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__author_id
+msgid "Author"
+msgstr "Auteur"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+
+#. module: customer_invoice_management
+#: model:res.groups,name:customer_invoice_management.group_custom_invoice
+msgid "Custom Group Invoice"
+msgstr "Groupe Facturation personnalisée"
+
+
+#. module: customer_invoice_management
+#: model:mail.template,name:customer_invoice_management.invoice_report_email_template
+msgid "Custom Report Email"
+msgstr "Email Rapport personnalisé"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__partner_id
+msgid "Customer"
+msgstr "Client"
+
+
+#. module: customer_invoice_management
+#: model:ir.actions.report,name:customer_invoice_management.action_report_customer_invoice
+msgid "Customer Invoice Report"
+msgstr "Rapport Facture personnalisé"
+
+
+#. module: customer_invoice_management
+#: model:ir.model,name:customer_invoice_management.model_customer_invoice_report_preview
+msgid "Customer Invoice Report Preview"
+msgstr "Aperçu Rapport Facturation personnalisé"
+
+#. module: customer_invoice_management
+#: model:ir.model,name:customer_invoice_management.model_customer_invoice_report_wizard
+msgid "Customer Invoice Report Wizard"
+msgstr "Rapport Facturation Wizard"
+
+#. module: customer_invoice_management
+#: model:ir.actions.act_window,name:customer_invoice_management.action_customer_invoice_report_wizard
+#: model:ir.actions.report,name:customer_invoice_management.action_report_customer_invoice_summary
+#: model:ir.ui.menu,name:customer_invoice_management.menu_customer_invoice_report
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Customer Invoice Summary Report"
+msgstr "Rapport Facturation Global"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Download PDF"
+msgstr "Télécharger PDF"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__end_date
+msgid "End Date"
+msgstr "Date Fin"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
+msgid "Invoice send & Print"
+msgstr "Envoyé farcture et imprimer"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
+msgid "Send"
+msgstr "Envoyer"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__start_date
+msgid "Start Date"
+msgstr "Date Début"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__subject
+msgid "Subject"
+msgstr "Sujet"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
+msgid "Subject..."
+msgstr "Sujet ..."
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Preview & Send"
+msgstr "Aperçu et envoyer"

@@ -10,13 +10,13 @@
         Long description of module's purpose
     """,
 
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
+    'author': "My Factura",
+    'website': "https://myfactura.pro/",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Uncategorized',
+    'category': 'account',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
@@ -25,10 +25,10 @@
     
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'security/invoice_security.xml',
+        'security/ir.model.access.csv',
         'security/menu_limit_access.xml',
-        # 'views/assets.xml',
+        'views/invoice_view.xml',
         'wizard/wizard_customer_invoice_report_view.xml',
         'wizard/wizard_report_preview.xml',
         'report/report_customer_invoice.xml',
