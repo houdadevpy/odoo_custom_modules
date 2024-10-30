@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <report 
-        id="action_report_customer_invoice_summary" 
-        model="account.move"
-        string="Customer Invoice Summary Report" 
-        report_type="qweb-pdf" 
-        name="customer_invoice_management.customer_invoice_report_summary_template" 
-        file="customer_invoice_management.customer_invoice_report_summary_template" 
-        attachment_use="False"/>
-
+    <record id="action_report_customer_invoice_summary" model="ir.actions.report">
+        <field name="name">Customer Invoice Summary Report</field>
+        <field name="model">customer.invoice.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">customer_invoice_management.customer_invoice_report_summary_template</field>
+        <field name="report_file">customer_invoice_management.customer_invoice_report_summary_template</field>
+        <field name="print_report_name">'Facture Vente Globale - %s - %s' % (object.start_date, object.end_date)</field>
+    </record>
 
 
     <record id="invoice_report_email_template" model="mail.template">
@@ -16,7 +15,7 @@
         <field name="model_id" ref="customer_invoice_management.model_customer_invoice_report_wizard"/>
         <field name="subject">{{ object.company_id.name }} -- Facture (Du : {{ object.start_date}} - Au : {{ object.end_date}})</field>
         <field name="email_from">{{object.company_id.email}}</field>
-        <field name="email_to">{{object.partner_id.email}}</field>
+        <field name="email_to">{{object.partner_ids.email}}</field>
         <field name="body_html">
             <![CDATA[
                 <p>Hello ,</p>

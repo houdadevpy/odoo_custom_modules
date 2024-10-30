@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 import base64
 
 import logging
@@ -14,35 +14,42 @@ class CustomerInvoiceReportWizard(models.TransientModel):
 
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)
-    partner_id = fields.Many2one('res.partner', string='Customer', required=True)
+    partner_ids = fields.Many2many('res.partner', string='Customer')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
     email_body = fields.Text(string="Email Body")
 
 
     def generate_and_send_invoice_report(self):
         invoice_report = self.env.ref('customer_invoice_management.action_report_customer_invoice_summary')
-        invoices = self.env['account.move'].search([
-            ('move_type', '=', 'out_invoice'),
-            ('partner_id', '=', self.partner_id.id),
-            ('invoice_date', '>=', self.start_date),
-            ('invoice_date', '<=', self.end_date),
-        ])
-        
+        _logger.warning('######################################### CUSTOMER')
+        _logger.warning(self.partner_ids)
+        if(self.partner_ids):
+            if(len(self.partner_ids.ids) == 1):
+                invoices = self.env['account.move'].search([
+                    ('move_type', '=', 'out_invoice'),
+                    ('partner_id', 'in', self.partner_ids.ids),
+                    ('invoice_date', '>=', self.start_date),
+                    ('invoice_date', '<=', self.end_date),
+                ])
+            else:
+                raise ValidationError(_("You can choose only one customer."))
+        else:
+            raise ValidationError(_("You have to choose a customer."))
         # Raise an error if no invoices found
         if not invoices:
-            raise ValidationError("No invoices found for the selected criteria.")
+            raise ValidationError(_("No invoices found for the selected criteria."))
         
         # Prepare the data to be passed
         data = {
             'start_date': self.start_date,
             'end_date': self.end_date,
-            'partner_id': self.partner_id.id,
+            'partner_id': self.partner_ids.ids,
             'invoices': invoices.ids,
         }
         generated_report = self.env['ir.actions.report']._render_qweb_pdf(invoice_report, [self.id], data=data)
         data_record = base64.b64encode(generated_report[0])
         ir_values = {
-            'name': 'Invoice Report',
+            'name': _('Invoice Report %s - %s',self.start_date, self.end_date) ,
             'type': 'binary',
             'datas': data_record,
             'mimetype': 'application/pdf',
@@ -91,25 +98,32 @@ class CustomerInvoiceReportWizard(models.TransientModel):
             raise UserError("End Date must be greater than Start Date.")
         
         # Fetch the invoices
-        invoices = self.env['account.move'].search([
-            ('move_type', '=', 'out_invoice'),
-            ('partner_id', '=', self.partner_id.id),
-            ('invoice_date', '>=', self.start_date),
-            ('invoice_date', '<=', self.end_date),
-        ])
+        if(self.partner_ids.ids):
+            invoices = self.env['account.move'].search([
+                ('move_type', '=', 'out_invoice'),
+                ('partner_id', 'in', self.partner_ids.ids),
+                ('invoice_date', '>=', self.start_date),
+                ('invoice_date', '<=', self.end_date),
+            ])
+        else:
+            invoices = self.env['account.move'].search([
+                ('move_type', '=', 'out_invoice'),
+                ('invoice_date', '>=', self.start_date),
+                ('invoice_date', '<=', self.end_date),
+            ])
         
         # Raise an error if no invoices found
         if not invoices:
-            raise ValidationError("No invoices found for the selected criteria.")
+            raise ValidationError(_("No invoices found for the selected criteria."))
         
         # Prepare the data to be passed
         data = {
             'start_date': self.start_date,
             'end_date': self.end_date,
-            'partner_id': self.partner_id.id,
+            'partner_id': self.partner_ids.ids,
             'invoices': invoices.ids,
         }
-        _logger.info("Found %d invoices for partner: %s between %s and %s", len(invoices), self.partner_id.name, self.start_date, self.end_date)
+        _logger.info("Found %d invoices for partner: %s between %s and %s", len(invoices), self.partner_ids.mapped('name'), self.start_date, self.end_date)
 
         # Pass the invoice IDs and the data to the report
         return self.env.ref('customer_invoice_management.action_report_customer_invoice_summary').report_action(invoices.ids, data=data)
@@ -126,7 +140,7 @@ class CustomerInvoiceReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data=None):
         # Fetch the partner, start_date, and end_date from the data dict
-        partner_id = data.get('partner_id')
+        partner_ids = data.get('partner_ids')
         start_date = data.get('start_date')
         end_date = data.get('end_date')
         invoices = data.get('invoices')
@@ -135,10 +149,10 @@ class CustomerInvoiceReport(models.AbstractModel):
 
 
         if not invoices:
-            raise ValidationError("No document IDs provided for report generation.")
+            raise ValidationError(_("No document IDs provided for report generation."))
 
         # Get the partner object
-        partner = self.env['res.partner'].browse(partner_id)
+        partner = self.env['res.partner'].browse(partner_ids)
         
         # Fetch the invoice records using docids (this is automatically passed from the wizard)
         invoices = self.env['account.move'].browse(invoices)
@@ -161,12 +175,19 @@ class CustomerInvoiceReport(models.AbstractModel):
 
         _logger.info("CHECKING INVOICES %s", invoices)
         _logger.info("CHECKING TAXES %s", tax_dict)
+        if(isinstance(start_date, str)):
+            start_date = (datetime.datetime.strptime(start_date, '%Y-%m-%d')).strftime('%d %b %Y')
+            end_date = (datetime.datetime.strptime(end_date, '%Y-%m-%d')).strftime('%d %b %Y')
+        else:
+            start_date = start_date.strftime('%d %b %Y') 
+            end_date = end_date.strftime('%d %b %Y')
+
 
         return {
             'docs': invoices,  # This is the invoice records
             'partner': partner,  # Pass the partner to use in the report
-            'start_date': start_date.strftime('%d %b %Y'),
-            'end_date': end_date.strftime('%d %b %Y'),
+            'start_date': start_date,
+            'end_date': end_date,
             'tax_dict': tax_dict,
         }
 
