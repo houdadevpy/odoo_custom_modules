@@ -36,11 +36,4 @@
         'report/report_customer_invoice_summary.xml',
         'report/customer_invoice_report_summary_template.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
-    # 'ir.actions.report': [
-    #     ('account.report_invoice', 'customer_invoice_management.action_report_customer_invoice'),
-    # ],
 }
