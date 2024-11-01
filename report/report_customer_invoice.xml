@@ -6,8 +6,8 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">customer_invoice_management.customer_invoice_report_template</field>
         <field name="report_file">customer_invoice_management.customer_invoice_report_template</field>
-        <field name="print_report_name">'Facture Vente - %s - %s' % (object.invoice_date, object.partner_ids.name)</field>
-        <field name="attachment">'Facture Vente - %s - %s.pdf' % (object.invoice_date, object.partner_ids.name)</field>
+        <field name="print_report_name">'Facture Vente - %s - %s' % (object.invoice_date, object.partner_id.name)</field>
+        <field name="attachment">'Facture Vente - %s - %s.pdf' % (object.invoice_date, object.partner_id.name)</field>
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="binding_type">report</field>
     </record>

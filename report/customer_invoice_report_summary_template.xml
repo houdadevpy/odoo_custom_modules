@@ -37,9 +37,9 @@
                                 <td/>
                                 <td align="right" style="font-weight: bold;">Total</td>
                                 <t t-set="total_amount_untaxed" t-value="sum(l.amount_untaxed for l in docs)"/>
-                                <td align="right" style="font-weight: bold;"><t t-esc="total_amount_untaxed"/><t t-esc="inv.currency_id.name"/></td>
-                                <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_tax for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
-                                <td align="right" style="font-weight: bold;"><t t-esc="sum(l.amount_total for l in docs)"/><t t-esc="inv.currency_id.name"/></td>
+                                <td align="right" style="font-weight: bold;"><t t-esc="round(total_amount_untaxed, 2)"/><t t-esc="inv.currency_id.name"/></td>
+                                <td align="right" style="font-weight: bold;"><t t-esc="round(sum(l.amount_tax for l in docs), 2)"/><t t-esc="inv.currency_id.name"/></td>
+                                <td align="right" style="font-weight: bold;"><t t-esc="round(sum(l.amount_total for l in docs), 2)"/><t t-esc="inv.currency_id.name"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -61,8 +61,8 @@
                                 <tr>
                                     <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax"/></td> -->
                                     <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][0]"/></td>
-                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][1]"/></td>
-                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="tax[1][2]"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="round(tax[1][1], 2)"/></td>
+                                    <td style="border: 1px solid black; padding: 8px;"><t t-esc="round(tax[1][2], 2)"/></td>
 
                                     <!-- <td style="border: 1px solid black; padding: 8px;"><t t-esc="sum(line.price_subtotal for line in docs.mapped('invoice_line_ids') if tax in line.tax_ids)"/></td>
                                     

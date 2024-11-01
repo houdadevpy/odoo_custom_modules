@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-23 19:27+0000\n"
-"PO-Revision-Date: 2024-10-23 19:27+0000\n"
+"POT-Creation-Date: 2024-11-01 09:32+0000\n"
+"PO-Revision-Date: 2024-11-01 09:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,93 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: customer_invoice_management
+#: model:mail.template,body_html:customer_invoice_management.invoice_report_email_template
+msgid ""
+"\n"
+"            \n"
+"                <p>Hello ,</p>\n"
+"\n"
+"                <p>I hope this message finds you well.</p>\n"
+"\n"
+"                <p>Attached, you will find your custom report for your review. Should you have any questions or require further assistance, please do not hesitate to reach out.</p>\n"
+"\n"
+"                <p>Thank you for your attention, and I look forward to your feedback.</p>\n"
+"\n"
+"                <p>Best regards,<br />\n"
+"            \n"
+"        "
+msgstr ""
+"\n"
+"            \n"
+"                <p>Bonjour,</p>\n"
+"\n"
+"                <p>J'espère que ce message vous trouve bien.</p>\n"
+"\n"
+"                <p>En pièce jointe, vous trouverez votre rapport de facturation. Si vous avez des questions ou avez besoin de plus d'assistance, n'hésitez pas à me contacter.</p>\n"
+"\n"
+"                <p>Merci pour votre attention, et j'attends avec impatience vos retours.</p>\n"
+"\n"
+"                <p>Cordialement,<br />\n"
+"            \n"
+"        "
+
+
+#. module: customer_invoice_management
+#: model:ir.actions.report,print_report_name:customer_invoice_management.action_report_customer_invoice
+msgid ""
+"'Facture Vente - %s - %s' % (object.invoice_date, object.partner_id.name)"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.actions.report,print_report_name:customer_invoice_management.action_report_customer_invoice_summary
+msgid ""
+"'Facture Vente Globale - %s - %s' % (object.start_date, object.end_date)"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "0,00 €"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<span style=\"font-weight: bold;\">Acompte:</span>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<span style=\"font-weight: bold;\">Net à payer:</span>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<span style=\"font-weight: bold;\">Total HT:</span>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<span style=\"font-weight: bold;\">Total TTC:</span>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<span style=\"font-weight: bold;\">Total TVA:</span>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "<strong>Shipping Address:</strong>"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__active_domain
+msgid "Active domain"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__partner_ids
+msgid "Additional Contacts"
+msgstr ""
 
 #. module: customer_invoice_management
 #: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
@@ -33,17 +120,79 @@ msgid "Author"
 msgstr "Auteur"
 
 #. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__author_id
+msgid ""
+"Author of the message. If not set, email_from may hold an email address that"
+" did not match any partner."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__composer_id
+msgid "Automatically created field to link to parent mail.compose.message"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Base"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__can_edit_body
+msgid "Can Edit Body"
+msgstr ""
+
+#. module: customer_invoice_management
 #: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
 #: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
 msgid "Cancel"
 msgstr "Annuler"
 
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Code article"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Code client"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__company_id
+msgid "Company"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__composition_mode
+msgid "Composition mode"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__reply_to_force_new
+msgid "Considers answers as new thread"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__body
+msgid "Contents"
+msgstr "Contenu"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__create_uid
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__create_date
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: customer_invoice_management
 #: model:res.groups,name:customer_invoice_management.group_custom_invoice
 msgid "Custom Group Invoice"
 msgstr "Groupe Facturation personnalisée"
-
 
 #. module: customer_invoice_management
 #: model:mail.template,name:customer_invoice_management.invoice_report_email_template
@@ -51,16 +200,14 @@ msgid "Custom Report Email"
 msgstr "Email Rapport personnalisé"
 
 #. module: customer_invoice_management
-#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__partner_id
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__partner_ids
 msgid "Customer"
 msgstr "Client"
-
 
 #. module: customer_invoice_management
 #: model:ir.actions.report,name:customer_invoice_management.action_report_customer_invoice
 msgid "Customer Invoice Report"
 msgstr "Rapport Facture personnalisé"
-
 
 #. module: customer_invoice_management
 #: model:ir.model,name:customer_invoice_management.model_customer_invoice_report_preview
@@ -81,14 +228,82 @@ msgid "Customer Invoice Summary Report"
 msgstr "Rapport Facturation Global"
 
 #. module: customer_invoice_management
-#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
-msgid "Download PDF"
-msgstr "Télécharger PDF"
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Date"
+msgstr ""
 
 #. module: customer_invoice_management
-#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
-msgid "print"
-msgstr "Imprimer"
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Date d'échéance"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Date de livraison"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__auto_delete
+msgid "Delete Emails"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__auto_delete_message
+msgid "Delete Message Copy"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Description"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__display_name
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__auto_delete_message
+msgid ""
+"Do not keep a copy of the email in the document communication history (mass "
+"mailing only)"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Du :"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__email_add_signature
+msgid "Email Add Signature"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__email_body
+msgid "Email Body"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__email_layout_xmlid
+msgid "Email Notification Layout"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__email_from
+msgid ""
+"Email address of the sender. This field is set when no matching partner is "
+"found and replaces the author_id field in the chatter."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid ""
+"En cas de retard de paiement, une pénalité égale à 1.5 fois le taux "
+"d'intérêt légal sera exigible (loi du 31/12/93)."
+msgstr ""
 
 #. module: customer_invoice_management
 #: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__end_date
@@ -96,9 +311,252 @@ msgid "End Date"
 msgstr "Date Fin"
 
 #. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Escompte pour règlement anticipé : 0%"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid ""
+"Escompte pour règlement anticipé : 0%\n"
+"                                    En cas de retard de paiement, une pénalité égale à 1.5 fois le taux intérêt légal\n"
+"                                    sera exigible (loi du 31/12/93)"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__email_from
+msgid "From"
+msgstr "A"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__id
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: customer_invoice_management
+#. odoo-python
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#, python-format
+msgid "Invoice Report %s - %s"
+msgstr "Rapport facture %s - %s"
+
+#. module: customer_invoice_management
 #: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
 msgid "Invoice send & Print"
 msgstr "Envoyé farcture et imprimer"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__is_mail_template_editor
+msgid "Is Editor"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Journal des ventes"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__lang
+msgid "Language"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview____last_update
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__write_uid
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__write_date
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__is_log
+msgid "Log as Internal Note"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__mail_activity_type_id
+msgid "Mail Activity Type"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__reply_to_force_new
+msgid ""
+"Manage answers as new incoming emails instead of replies going to the same "
+"thread."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__record_name
+msgid "Message Record Name"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__message_type
+msgid ""
+"Message type: email for email message, notification for system message, "
+"comment for other messages such as user replies"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Mode règlement"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Montant"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Montant HT"
+msgstr ""
+
+#. module: customer_invoice_management
+#. odoo-python
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#, python-format
+msgid "No document IDs provided for report generation."
+msgstr "Pas de documents trouvés"
+
+#. module: customer_invoice_management
+#. odoo-python
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#, python-format
+msgid "No invoices found for the selected criteria."
+msgstr "Aucune facture trouvée pour les critères sélectionnés."
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Nom"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__notify
+msgid "Notify followers"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__notify
+msgid "Notify followers of the document (mass post only)"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Numéro"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__lang
+msgid ""
+"Optional translation language (ISO code) to select when sending out an "
+"email. If not set, the english version will be used. This should usually be "
+"a placeholder expression that provides the appropriate language, e.g. {{ "
+"object.partner_id.lang }}."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__reply_to_mode
+msgid ""
+"Original Discussion: Answers go in the original document discussion thread. \n"
+" Another Email Address: Answers go to the email address mentioned in the tracking message-id instead of original document discussion thread. \n"
+" This has an impact on the generated message-id."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__mail_server_id
+msgid "Outgoing mail server"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "PU HT"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__parent_id
+msgid "Parent Message"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Preview & Send"
+msgstr "Aperçu et envoyer"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Qté"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__email_to
+msgid "Recipient"
+msgstr "Destinataire"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__res_id
+msgid "Related Document ID"
+msgstr "Pièce jointe"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__model
+msgid "Related Document Model"
+msgstr "Pièce jointe"
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__render_model
+msgid "Rendering Model"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__reply_to_mode
+msgid "Replies"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__reply_to
+msgid "Reply To"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__reply_to
+msgid ""
+"Reply email address. Setting the reply_to bypasses the automatic thread "
+"creation."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__report_wizard_id
+msgid "Report Wizard"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Récapitulatif de TVA"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "SIRET : 790 372 890 - NAF : - RCS : - N° TVA :"
+msgstr ""
 
 #. module: customer_invoice_management
 #: model_terms:ir.ui.view,arch_db:customer_invoice_management.account_invoice_send_wizard_form
@@ -121,20 +579,111 @@ msgid "Subject..."
 msgstr "Sujet ..."
 
 #. module: customer_invoice_management
-#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
-msgid "Preview & Send"
-msgstr "Aperçu et envoyer"
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__subtype_id
+msgid "Subtype"
+msgstr ""
 
 #. module: customer_invoice_management
-#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_customer_invoice_report_wizard
-msgid "Print"
-msgstr "Imprimer"
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "TVA"
+msgstr ""
 
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Taux"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Taux TVA"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Tax 15%"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_template
+msgid "Tax ID"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,help:customer_invoice_management.field_customer_invoice_report_preview__auto_delete
+msgid ""
+"This option permanently removes any track of email after it's been sent, "
+"including from the Technical menu in the Settings, in order to preserve "
+"storage space of your Odoo database."
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Total"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Total HT"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Total TTC"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "Total TVA"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__message_type
+msgid "Type"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__use_active_domain
+msgid "Use active domain"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_customer_invoice_report_preview__template_id
+msgid "Use template"
+msgstr ""
 
 #. module: customer_invoice_management
 #. odoo-python
-#: code:custom/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
 #, python-format
-msgid "No invoices found for the selected criteria."
-msgstr "Aucune facture trouvée pour les critères sélectionnés."
+msgid "You can choose only one customer."
+msgstr "Vous devez choisir qu'un seul client"
 
+#. module: customer_invoice_management
+#. odoo-python
+#: code:addons/customer_invoice_management/models/wizard_customer_invoice_report.py:0
+#, python-format
+msgid "You have to choose a customer."
+msgstr "Vous devez choisir un client"
+
+#. module: customer_invoice_management
+#: model:ir.actions.act_window,name:customer_invoice_management.account_invoice_send_wizard
+msgid "account_invoice_send_wizard window"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.customer_invoice_report_summary_template
+msgid "au :"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:ir.model,name:customer_invoice_management.model_report_customer_invoice_management_customer_invoice_report_summary_template
+msgid ""
+"report.customer_invoice_management.customer_invoice_report_summary_template"
+msgstr ""
+
+#. module: customer_invoice_management
+#: model:mail.template,subject:customer_invoice_management.invoice_report_email_template
+msgid ""
+"{{ object.company_id.name }} -- Facture (Du : {{ object.start_date}} - Au : "
+"{{ object.end_date}})"
+msgstr ""
