@@ -217,3 +217,49 @@ class CustomerInvoiceReportPreview(models.TransientModel):
                 email_template.attachment_ids = [(6, 0, self.attachment_ids.ids)]
             email_template.send_mail(
                 self.id, email_values=email_values, force_send=True)
+
+
+
+class GlobalInvoiceReportWizard(models.TransientModel):
+    _name = 'global.invoice.report.wizard'
+    start_date = fields.Date('Start Date', required=True)
+    end_date = fields.Date('End Date', required=True)
+
+
+    def generate_global_report(self):
+        self.ensure_one()
+
+        # Check date validity
+        if self.end_date < self.start_date:
+            raise UserError("End Date must be greater than Start Date.")
+
+        # Define the domain
+        domain = [
+            ('state', '=', 'posted'),
+            ('move_type', '=', 'out_invoice'),
+            ('invoice_date', '>=', self.start_date),
+            ('invoice_date', '<=', self.end_date)
+        ]
+
+        # Use read_group to aggregate data
+        result = self.env['account.move'].read_group(
+            domain=domain,
+            fields=['amount_total:sum', 'amount_untaxed:sum', 'amount_tax:sum'],
+            groupby=['partner_id']
+        )
+
+        # Format the result for the report
+        formatted_result = [
+            {
+                'partner': group.get('partner_id', ('Unknown', 'Unknown'))[1] if group.get('partner_id') else 'No Partner',
+                'amount_total': group.get('amount_total', 0.0),
+                'amount_untaxed': group.get('amount_untaxed', 0.0),
+                'amount_tax': group.get('amount_tax', 0.0),
+            }
+            for group in result
+        ]
+        return formatted_result
+
+    def action_print_global_invoice_report(self):
+        # This method triggers the report
+        return self.env.ref('customer_invoice_management.action_global_invoice_report').report_action(self)

@@ -1,0 +1,70 @@
+<odoo>
+    <template id="global_invoice_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
+                        <style>
+                            .report-header {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #f0f0f0; /* Grey background */
+                                padding: 20px;
+                                border-radius: 8px; /* Optional rounded corners */
+                                margin-bottom: 20px; /* Optional margin to separate it from the rest of the content */
+                            }
+                            .report-header h2,
+                            .report-header h5 {
+                                margin: 5px 0; /* Space between lines */
+                                text-align: center; /* Center the text */
+                            }
+                        </style>
+
+                        <t t-set="title">Global Invoice Report</t>
+
+                        <!-- Header section with the applied styles -->
+                        <div class="report-header">
+                            <h2><strong>Edition du journal des ventes</strong></h2>
+                            <h5>Période du : <span t-field="o.start_date"/> AU <span t-field="o.end_date"/></h5>
+                            
+                        </div>
+                        <h5>Date : <t t-esc="time.strftime('%d/%m/%Y')"/></h5>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Code Partner</th>
+                                    <th>Partner</th>
+                                    <th>Untaxed Amount</th>
+                                    <th>Taxes</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.generate_global_report()" t-as="row">
+                                    <tr>
+                                        <td><t t-esc="row['partner']"/></td>
+                                        <td><t t-esc="row['partner']"/></td>
+                                        <td><t t-esc="row['amount_untaxed']"/></td>
+                                        <td><t t-esc="row['amount_tax']"/></td>
+                                        <td><t t-esc="row['amount_total']"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_global_invoice_report" model="ir.actions.report">
+        <field name="name">Global Invoice Report</field>
+        <field name="model">global.invoice.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_invoice_management.global_invoice_report_template</field>
+    </record>
+
+
+</odoo>

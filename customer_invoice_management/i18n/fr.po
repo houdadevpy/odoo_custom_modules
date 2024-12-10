@@ -687,3 +687,64 @@ msgid ""
 "{{ object.company_id.name }} -- Facture (Du : {{ object.start_date}} - Au : "
 "{{ object.end_date}})"
 msgstr ""
+
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.global_invoice_report_template
+msgid "Code Partner"
+msgstr "Code Client"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.global_invoice_report_template
+msgid "Partner"
+msgstr "Client"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.global_invoice_report_template
+msgid "Untaxed Amount"
+msgstr "Total HT"
+
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.global_invoice_report_template
+msgid "Taxes"
+msgstr "TVA"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.global_invoice_report_template
+msgid "Total Amount"
+msgstr "Total TTC"
+
+#. module: customer_invoice_management
+#: model:ir.actions.act_window,name:customer_invoice_management.action_global_invoice_report_wizard
+#: model:ir.ui.menu,name:customer_invoice_management.menu_customer_invoice_global_report
+msgid "Customer Invoice Global Report"
+msgstr "Journal des ventes"
+
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_global_invoice_report_wizard__start_date
+msgid "Start Date"
+msgstr "Date Début"
+
+
+#. module: customer_invoice_management
+#: model:ir.model.fields,field_description:customer_invoice_management.field_global_invoice_report_wizard__end_date
+msgid "End Date"
+msgstr "Date Fin"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_global_invoice_report_wizard
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: customer_invoice_management
+#: model_terms:ir.ui.view,arch_db:customer_invoice_management.view_global_invoice_report_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account
+#: model:ir.actions.report,name:customer_invoice_management.action_global_invoice_report
+msgid "Global Invoice Report"
+msgstr "Journal de ventes"
+

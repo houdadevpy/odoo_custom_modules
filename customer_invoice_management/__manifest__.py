@@ -35,5 +35,6 @@
         'report/customer_invoice_report_template.xml',
         'report/report_customer_invoice_summary.xml',
         'report/customer_invoice_report_summary_template.xml',
+        'report/global_invoice_report.xml',
     ],
 }

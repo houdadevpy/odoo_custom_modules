@@ -26,7 +26,39 @@
         <field name="target">new</field>
     </record>
 
- <menuitem id="menu_customer_invoice_report"
+
+
+    <record id="view_global_invoice_report_wizard" model="ir.ui.view">
+        <field name="name">global.invoice.report.wizard.form</field>
+        <field name="model">global.invoice.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Global Invoice Summary Report">
+                <group>
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </group>
+                <footer>
+                    <button string="Print" type="object" name="action_print_global_invoice_report" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_global_invoice_report_wizard" model="ir.actions.act_window">
+        <field name="name">Customer Invoice Global Report</field>
+        <field name="res_model">global.invoice.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_customer_invoice_global_report"
+              name="Customer Invoice Global Report"
+              parent="account.menu_finance"
+              action="action_global_invoice_report_wizard" 
+            groups="customer_invoice_management.group_custom_invoice"/>
+
+    <menuitem id="menu_customer_invoice_report"
               name="Customer Invoice Summary Report"
               parent="account.menu_finance"
               action="action_customer_invoice_report_wizard" 
